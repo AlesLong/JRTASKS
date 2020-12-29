@@ -21,8 +21,8 @@ public class Solution {
                 try {
                     int num = Integer.parseInt(symbols[i]);
                     outputFileWriter.write(num + " ");
-                } catch (NumberFormatException ignore) {
-                    
+                } catch (Exception ignore) {
+
                 }
             }
         }
