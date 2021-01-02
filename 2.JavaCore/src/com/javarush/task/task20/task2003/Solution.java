@@ -14,13 +14,11 @@ public class Solution {
     public static Map<String, String> runtimeStorage = new HashMap<>();
 
     public static void save(OutputStream outputStream) throws Exception {
-        PrintWriter writer = new PrintWriter(outputStream);
-
-
+        //напишите тут ваш код
     }
 
     public static void load(InputStream inputStream) throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+        //напишите тут ваш код
     }
 
     public static void main(String[] args) {
