@@ -45,14 +45,14 @@ public class Solution {
 
         @Override
         public void writeExternal(ObjectOutput out) throws IOException {
-           out.writeObject(this.getAddress());
+            out.writeObject(this.getAddress());
             out.writeInt(this.getYear());
         }
 
         @Override
         public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-           address=(String) in.readObject();
-          year =  in.readInt();
+            address = (String) in.readObject();
+            year = in.readInt();
 
         }
     }
