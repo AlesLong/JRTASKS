@@ -11,6 +11,7 @@ public class Snake {
     public Snake(int x, int y) {
         sections.add(new SnakeSection(x, y));
         isAlive = true;
+
     }
 
     public List<SnakeSection> getSections() {
@@ -40,6 +41,6 @@ public class Snake {
     }
 
     public void move() {
-        
+
     }
 }
