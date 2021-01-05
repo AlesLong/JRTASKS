@@ -34,7 +34,7 @@ public class Solution {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
     }
 
 
