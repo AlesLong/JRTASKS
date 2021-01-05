@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hippodrome {
+
     public Hippodrome(List<Horse> horses) {
         this.horses = horses;
     }
@@ -15,6 +16,6 @@ public class Hippodrome {
     private List<Horse> horses = new ArrayList<>();
 
     public static void main(String[] args) {
-        
+
     }
 }
