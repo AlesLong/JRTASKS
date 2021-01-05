@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Hippodrome {
-
+    private List<Horse> horses = new ArrayList<>();
     static Hippodrome game;
 
     public Hippodrome(List<Horse> horses) {
@@ -15,7 +15,18 @@ public class Hippodrome {
         return horses;
     }
 
-    private List<Horse> horses = new ArrayList<>();
+    void run() {
+
+    }
+
+    void move() {
+
+    }
+
+    void print() {
+        
+    }
+
 
     public static void main(String[] args) {
         List<Horse> horses = new ArrayList<>();
