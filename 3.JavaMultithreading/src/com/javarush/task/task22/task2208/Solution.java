@@ -9,11 +9,11 @@ import java.util.Map;
 
 public class Solution {
     public static void main(String[] args) {
-        Map<String, String> map = new LinkedHashMap<String, String>();
+        Map<String, String> map = new LinkedHashMap<>();
         map.put("name", "Ivanov");
         map.put("country", "Ukraine");
         map.put("city", "Kyiv");
-        map.put("age", "null");
+        map.put("age", null);
         System.out.println(getQuery(map));
     }
 
