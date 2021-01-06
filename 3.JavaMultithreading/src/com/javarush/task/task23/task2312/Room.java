@@ -58,39 +58,55 @@ public class Room {
         KeyboardObserver keyboardObserver = new KeyboardObserver();
         keyboardObserver.start();
 
-        
+        //пока змея жива
         while (snake.isAlive()) {
-
+            //"наблюдатель" содержит события о нажатии клавиш?
             if (keyboardObserver.hasKeyEvents()) {
                 KeyEvent event = keyboardObserver.getEventFromTop();
-
+                //Если равно символу 'q' - выйти из игры.
                 if (event.getKeyChar() == 'q') return;
 
-
+                //Если "стрелка влево" - сдвинуть фигурку влево
                 if (event.getKeyCode() == KeyEvent.VK_LEFT)
                     snake.setDirection(SnakeDirection.LEFT);
-
+                    //Если "стрелка вправо" - сдвинуть фигурку вправо
                 else if (event.getKeyCode() == KeyEvent.VK_RIGHT)
                     snake.setDirection(SnakeDirection.RIGHT);
-
+                    //Если "стрелка вверх" - сдвинуть фигурку вверх
                 else if (event.getKeyCode() == KeyEvent.VK_UP)
                     snake.setDirection(SnakeDirection.UP);
-
+                    //Если "стрелка вниз" - сдвинуть фигурку вниз
                 else if (event.getKeyCode() == KeyEvent.VK_DOWN)
                     snake.setDirection(SnakeDirection.DOWN);
             }
 
-            snake.move();
-            print();
-            sleep();
+            snake.move();   //двигаем змею
+            print();        //отображаем текущее состояние игры
+            sleep();        //пауза между ходами
         }
 
         System.out.println("Game Over!");
     }
 
     public void print() {
+        int[][] matrix = new int[height][width];
+        for (SnakeSection s : snake.getSections()) {
+            matrix[s.getY()][s.getX()] = 1;
+        }
+        matrix[snake.getY()][snake.getX()] = 2;
+        matrix[mouse.getY()][mouse.getX()] = 3;
+        for (int j = 0; j < height; j++) {
+            for (int i = 0; i < width; i++) {
 
+                if (matrix[j][i] == 1) System.out.print("x");
+                else if (matrix[j][i] == 2) System.out.print("X");
+                else if (matrix[j][i] == 3) System.out.print("^");
+                else System.out.print(".");
+            }
+            System.out.println();
+        }
     }
+
 
     public void eatMouse() {
         createMouse();
