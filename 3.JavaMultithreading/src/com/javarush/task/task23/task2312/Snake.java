@@ -41,6 +41,23 @@ public class Snake {
     }
 
     public void move() {
+        if (isAlive) {
+            if (direction == SnakeDirection.UP) {
+                move(0, -1);
+            }
+            if (direction == SnakeDirection.RIGHT) {
+                move(1, 0);
+            }
+            if (direction == SnakeDirection.DOWN) {
+                move(0, 1);
+            }
+            if (direction == SnakeDirection.LEFT) {
+                move(-1, 0);
+            }
+        }
+    }
+
+    public void move(int a, int b) {
 
     }
 }
