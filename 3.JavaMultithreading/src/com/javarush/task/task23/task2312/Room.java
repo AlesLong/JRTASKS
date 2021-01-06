@@ -1,77 +1,124 @@
 package com.javarush.task.task23.task2312;
 
+import java.awt.event.KeyEvent;
+
 public class Room {
-    static Room game;
     private int width;
     private int height;
     private Snake snake;
     private Mouse mouse;
 
+    public static Room game;
+
     public Room(int width, int height, Snake snake) {
         this.width = width;
         this.height = height;
         this.snake = snake;
-    }
-
-    public void run() {
-
-    }
-
-    public void print() {
-
-    }
-
-    public void createMouse() {
-        mouse = new Mouse((int) (Math.random() * width), (int) (Math.random() * height));
-    }
-
-    public void eatMouse() {
-        createMouse();
-    }
-
-    public void sleep() {
-        
-    }
-
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
+        game = this;
     }
 
     public Snake getSnake() {
         return snake;
     }
 
-    public void setSnake(Snake snake) {
-        this.snake = snake;
-    }
-
     public Mouse getMouse() {
         return mouse;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setSnake(Snake snake) {
+        this.snake = snake;
     }
 
     public void setMouse(Mouse mouse) {
         this.mouse = mouse;
     }
 
+    /**
+     * Основной цикл программы.
+     * Тут происходят все важные действия
+     */
+    public void run() throws InterruptedException {
+        //Создаем объект "наблюдатель за клавиатурой" и стартуем его.
+        KeyboardObserver keyboardObserver = new KeyboardObserver();
+        keyboardObserver.start();
 
-    public static void main(String[] args) {
-        Snake snake = new Snake(20, 10);
-        game = new Room(20, 20, snake);
-        snake.setDirection(SnakeDirection.DOWN);
+        
+        while (snake.isAlive()) {
+
+            if (keyboardObserver.hasKeyEvents()) {
+                KeyEvent event = keyboardObserver.getEventFromTop();
+
+                if (event.getKeyChar() == 'q') return;
+
+
+                if (event.getKeyCode() == KeyEvent.VK_LEFT)
+                    snake.setDirection(SnakeDirection.LEFT);
+
+                else if (event.getKeyCode() == KeyEvent.VK_RIGHT)
+                    snake.setDirection(SnakeDirection.RIGHT);
+
+                else if (event.getKeyCode() == KeyEvent.VK_UP)
+                    snake.setDirection(SnakeDirection.UP);
+
+                else if (event.getKeyCode() == KeyEvent.VK_DOWN)
+                    snake.setDirection(SnakeDirection.DOWN);
+            }
+
+            snake.move();
+            print();
+            sleep();
+        }
+
+        System.out.println("Game Over!");
+    }
+
+    public void print() {
+
+    }
+
+    public void eatMouse() {
+        createMouse();
+    }
+
+    public void createMouse() {
+        int x = (int) (Math.random() * width);
+        int y = (int) (Math.random() * height);
+
+        mouse = new Mouse(x, y);
+    }
+
+    public static void main(String[] args) throws InterruptedException {
+        game = new Room(20, 20, new Snake(10, 10));
+        game.snake.setDirection(SnakeDirection.DOWN);
         game.createMouse();
         game.run();
+    }
+
+    public void sleep() throws InterruptedException {
+        if (snake.getSections().size() < 11) {
+            Thread.sleep(500);
+        }
+        if ((11 <= snake.getSections().size()) && (snake.getSections().size()) < 15) {
+            Thread.sleep(300);
+        }
+        if (15 < snake.getSections().size()) {
+            Thread.sleep(200);
+        }
     }
 }
