@@ -3,8 +3,17 @@ package com.javarush.task.task24.task2413;
 import java.util.List;
 
 public class Arkanoid {
+    static Arkanoid game = new Arkanoid(500, 500);
 
     private int width;
+    private Ball ball;
+    private Stand stand;
+    private List<Brick> bricks;
+
+    public Arkanoid(int width, int height) {
+        this.width = width;
+        this.height = height;
+    }
 
     public Ball getBall() {
         return ball;
@@ -30,14 +39,14 @@ public class Arkanoid {
         this.bricks = bricks;
     }
 
-    private Ball ball;
-    private Stand stand;
-    private List<Brick> bricks;
+    void run() {
 
-    public Arkanoid(int width, int height) {
-        this.width = width;
-        this.height = height;
     }
+
+    void move() {
+
+    }
+
 
     public int getWidth() {
         return width;
