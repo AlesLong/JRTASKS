@@ -2,6 +2,14 @@ package com.javarush.task.task24.task2413;
 
 public class Ball extends BaseObject {
     private double speed;
+
+    public void setDirection(double direction) {
+        this.direction = direction;
+        double angle = Math.toRadians(direction);
+        dx = Math.cos(angle) * speed;
+        dy = -Math.sin(angle) * speed;
+    }
+
     private double direction;
     private double dx;
     private double dy;
@@ -50,5 +58,9 @@ public class Ball extends BaseObject {
 
     void start() {
         isFrozen = false;
+    }
+
+    void checkRebound(int minx, int maxx, int miny, int maxy) {
+
     }
 }
