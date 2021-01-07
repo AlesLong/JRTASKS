@@ -58,6 +58,7 @@ public class Canvas {
     }
 
     void print() {
+
         for (int i = 0; i < getHeight() + 2; i++) {
             for (int j = 0; j < getWidth() + 2; j++) {
                 System.out.print(matrix[i][j]);
