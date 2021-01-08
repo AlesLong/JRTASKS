@@ -45,12 +45,18 @@ public class Snake extends GameObject {
         }
     }
 
-    public void move() {
+    public void move(Apple apple) {
         GameObject creatHead = createNewHead();
+        if (apple.x == creatHead.x && apple.y == creatHead.y) {
+            apple.isAlive = false;
+            snakeParts.add(0, creatHead);
+
+        }
         if (creatHead.x >= SnakeGame.WIDTH || creatHead.y >= SnakeGame.HEIGHT || creatHead.x < 0 || creatHead.y < 0) {
             isAlive = false;
             return;
-        } else {
+        }
+        if (!(apple.x == creatHead.x && apple.y == creatHead.y)) {
             snakeParts.add(0, creatHead);
             removeTail();
         }
