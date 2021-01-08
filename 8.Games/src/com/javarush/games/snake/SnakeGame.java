@@ -19,7 +19,7 @@ public class SnakeGame extends Game {
     private void createGame() {
         snake = new Snake(WIDTH / 2, HEIGHT / 2);
         drawScene();
-        turnDelay=300;
+        turnDelay = 300;
         setTurnTimer(turnDelay);
 
     }
@@ -27,7 +27,7 @@ public class SnakeGame extends Game {
     private void drawScene() {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
-                setCellValueEx(x, y, Color.AQUA,"");
+                setCellValueEx(x, y, Color.AQUA, "");
             }
         }
         snake.draw(this);
@@ -37,4 +37,20 @@ public class SnakeGame extends Game {
         snake.move();
         drawScene();
     }
+
+    public void onKeyPress(Key key) {
+        if (key.equals(Key.LEFT)) {
+            snake.setDirection(Direction.LEFT);
+        }
+        if (key.equals(Key.RIGHT)) {
+            snake.setDirection(Direction.RIGHT);
+        }
+        if (key.equals(Key.UP)) {
+            snake.setDirection(Direction.UP);
+        }
+        if (key.equals(Key.DOWN)) {
+            snake.setDirection(Direction.DOWN);
+        }
+    }
 }
+

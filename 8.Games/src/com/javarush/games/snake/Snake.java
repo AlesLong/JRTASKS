@@ -13,7 +13,12 @@ public class Snake extends GameObject {
     public boolean isAlive = true;
 
     public void setDirection(Direction direction) {
-        this.direction = direction;
+        if ((direction == Direction.UP && this.direction != Direction.DOWN)
+                || (direction == Direction.DOWN && this.direction != Direction.UP)
+                || (direction == Direction.LEFT && this.direction != Direction.RIGHT)
+                || direction == Direction.RIGHT && this.direction != Direction.LEFT) {
+            this.direction = direction;
+        }
     }
 
     private Direction direction = Direction.LEFT;
@@ -70,3 +75,4 @@ public class Snake extends GameObject {
         snakeParts.remove(snakeParts.size() - 1);
     }
 }
+
