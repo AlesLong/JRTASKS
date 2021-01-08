@@ -90,6 +90,10 @@ public class Snake extends GameObject {
         return false;
     }
 
+    public int getLength() {
+        return snakeParts.size();
+    }
+
     public void removeTail() {
         snakeParts.remove(snakeParts.size() - 1);
     }
