@@ -47,6 +47,10 @@ public class Snake extends GameObject {
 
     public void move(Apple apple) {
         GameObject creatHead = createNewHead();
+        if (checkCollision(creatHead)) {
+            isAlive = false;
+            return;
+        }
         if (apple.x == creatHead.x && apple.y == creatHead.y) {
             apple.isAlive = false;
             snakeParts.add(0, creatHead);
@@ -75,6 +79,15 @@ public class Snake extends GameObject {
         } else {
             return new GameObject(snakeParts.get(0).x, snakeParts.get(0).y + 1);
         }
+    }
+
+    public boolean checkCollision(GameObject gameObject) {
+        for (int i = 0; i < snakeParts.size(); i++) {
+            if (gameObject.x == snakeParts.get(i).x && gameObject.y == snakeParts.get(i).y) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void removeTail() {
