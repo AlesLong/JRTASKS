@@ -41,6 +41,14 @@ public class Snake extends GameObject {
     }
 
     public void move() {
+        GameObject creatHead = createNewHead();
+        if (creatHead.x >= SnakeGame.WIDTH || creatHead.y >= SnakeGame.HEIGHT || creatHead.x < 0 || creatHead.y < 0) {
+            isAlive = false;
+            return;
+        } else {
+            snakeParts.add(0, creatHead);
+            removeTail();
+        }
 
     }
 
@@ -59,6 +67,6 @@ public class Snake extends GameObject {
     }
 
     public void removeTail() {
-        snakeParts.remove(snakeParts.size()-1);
+        snakeParts.remove(snakeParts.size() - 1);
     }
 }
