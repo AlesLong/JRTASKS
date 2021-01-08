@@ -30,7 +30,13 @@ public class SnakeGame extends Game {
     }
 
     private void createNewApple() {
-        apple = new Apple(getRandomNumber(WIDTH), getRandomNumber(WIDTH));
+        Apple newApple;
+        do {
+            int x = getRandomNumber(WIDTH);
+            int y = getRandomNumber(HEIGHT);
+            newApple = new Apple(x, y);
+        } while (snake.checkCollision(newApple));
+        apple = newApple;
     }
 
     private void drawScene() {
@@ -58,6 +64,10 @@ public class SnakeGame extends Game {
     }
 
     public void onKeyPress(Key key) {
+        if (key == Key.SPACE && isGameStopped) {
+            createGame();
+        }
+
         if (key.equals(Key.LEFT)) {
             snake.setDirection(Direction.LEFT);
         }
