@@ -39,4 +39,8 @@ public class Snake extends GameObject {
             }
         }
     }
+    public void move(){
+
+    }
+
 }
