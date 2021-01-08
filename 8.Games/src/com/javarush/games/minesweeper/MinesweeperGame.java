@@ -14,6 +14,7 @@ public class MinesweeperGame extends Game {
     private static final String MINE = "\uD83D\uDCA3";
     private static final String FLAG = "\uD83D\uDEA9";
     private int countFlags;
+    private boolean isGameStopped;
 
     @Override
     public void initialize() {
@@ -22,6 +23,7 @@ public class MinesweeperGame extends Game {
     }
 
     private void createGame() {
+        isGameStopped = false;
         for (int y = 0; y < SIDE; y++) {
             for (int x = 0; x < SIDE; x++) {
                 boolean isMine = getRandomNumber(10) < 1;
@@ -77,6 +79,8 @@ public class MinesweeperGame extends Game {
         setCellColor(x, y, Color.GREEN);
         if (gameObject.isMine) {
             setCellValue(gameObject.x, gameObject.y, MINE);
+            setCellValueEx(gameObject.x, gameObject.y, Color.RED, MINE);
+            gameOver();
         } else if (gameObject.countMineNeighbors == 0) {
             setCellValue(gameObject.x, gameObject.y, "");
             List<GameObject> neighbors = getNeighbors(gameObject);
@@ -100,20 +104,27 @@ public class MinesweeperGame extends Game {
     }
 
     private void markTile(int x, int y) {
-        GameObject gameObject = gameField[y][x];
-        if (gameObject.isOpen || (countFlags == 0 && !gameObject.isFlag)) {
-            return;
+        if (isGameStopped = false) {
+            GameObject gameObject = gameField[y][x];
+            if (gameObject.isOpen || (countFlags == 0 && !gameObject.isFlag)) {
+                return;
+            }
+            if (gameObject.isFlag) {
+                countFlags++;
+                gameObject.isFlag = false;
+                setCellValue(x, y, "");
+                setCellColor(x, y, Color.ORANGE);
+            } else {
+                countFlags--;
+                gameObject.isFlag = true;
+                setCellValue(x, y, FLAG);
+                setCellColor(x, y, Color.YELLOW);
+            }
         }
-        if (gameObject.isFlag) {
-            countFlags++;
-            gameObject.isFlag = false;
-            setCellValue(x, y, "");
-            setCellColor(x, y, Color.ORANGE);
-        } else {
-            countFlags--;
-            gameObject.isFlag = true;
-            setCellValue(x, y, FLAG);
-            setCellColor(x, y, Color.YELLOW);
-        }
+    }
+
+    private void gameOver() {
+        isGameStopped = true;
+        showMessageDialog(Color.ALICEBLUE, "Sry, u lose(", Color.BURLYWOOD, 12);
     }
 }
