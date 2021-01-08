@@ -45,7 +45,7 @@ public class SnakeGame extends Game {
     private void drawScene() {
         for (int x = 0; x < WIDTH; x++) {
             for (int y = 0; y < HEIGHT; y++) {
-                setCellValueEx(x, y, Color.AQUA, "");
+                setCellValueEx(x, y, Color.BLACK, "");
             }
         }
         snake.draw(this);
@@ -98,7 +98,7 @@ public class SnakeGame extends Game {
     private void gameOver() {
         stopTurnTimer();
         isGameStopped = true;
-        showMessageDialog(Color.GOLDENROD, "U Lose, try again", Color.CORAL, 25);
+        showMessageDialog(Color.GOLDENROD, "U Lose Paprika, try again", Color.CORAL, 25);
     }
 }
 
