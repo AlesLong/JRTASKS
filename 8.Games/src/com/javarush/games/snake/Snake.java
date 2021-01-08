@@ -13,12 +13,30 @@ public class Snake extends GameObject {
     public boolean isAlive = true;
 
     public void setDirection(Direction direction) {
-        if ((direction == Direction.UP && this.direction != Direction.DOWN)
-                || (direction == Direction.DOWN && this.direction != Direction.UP)
-                || (direction == Direction.LEFT && this.direction != Direction.RIGHT)
-                || direction == Direction.RIGHT && this.direction != Direction.LEFT) {
-            this.direction = direction;
+        if ((this.direction == Direction.LEFT || this.direction == Direction.RIGHT) && snakeParts.get(0).x == snakeParts.get(1).x) {
+            return;
         }
+        if ((this.direction == Direction.UP || this.direction == Direction.DOWN) && snakeParts.get(0).y == snakeParts.get(1).y) {
+            return;
+        }
+
+        if (direction == Direction.UP && this.direction == Direction.DOWN) {
+            return;
+        } else if (direction == Direction.LEFT && this.direction == Direction.RIGHT) {
+            return;
+        } else if (direction == Direction.RIGHT && this.direction == Direction.LEFT) {
+            return;
+        } else if (direction == Direction.DOWN && this.direction == Direction.UP) {
+            return;
+        }
+
+        this.direction = direction;
+        //  if ((direction == Direction.UP && this.direction != Direction.DOWN)
+        //          || (direction == Direction.DOWN && this.direction != Direction.UP)
+        //          || (direction == Direction.LEFT && this.direction != Direction.RIGHT)
+        //          || direction == Direction.RIGHT && this.direction != Direction.LEFT) {
+        //      this.direction = direction;
+        //  }
     }
 
     private Direction direction = Direction.LEFT;
