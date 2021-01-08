@@ -48,7 +48,7 @@ public class MinesweeperGame extends Game {
                     countMinesOnField++;
                 }
                 gameField[y][x] = new GameObject(x, y, isMine);
-                setCellColor(x, y, Color.ORANGE);
+                setCellColor(x, y, Color.BLUE);
                 setCellValue(x, y, "");
             }
         }
@@ -137,12 +137,12 @@ public class MinesweeperGame extends Game {
             countFlags++;
             gameObject.isFlag = false;
             setCellValue(x, y, "");
-            setCellColor(x, y, Color.ORANGE);
+            setCellColor(x, y, Color.BLUE);
         } else {
             countFlags--;
             gameObject.isFlag = true;
             setCellValue(x, y, FLAG);
-            setCellColor(x, y, Color.YELLOW);
+            setCellColor(x, y, Color.FUCHSIA);
         }
     }
 
@@ -152,7 +152,7 @@ public class MinesweeperGame extends Game {
     }
 
     private void win() {
-        showMessageDialog(Color.WHITE, "Congratz, u WIN! set+ if like", Color.VIOLET, 50);
+        showMessageDialog(Color.WHITE, "Congratz, u WIN! set+ if like", Color.VIOLET, 30);
         isGameStopped = true;
     }
 

@@ -4,6 +4,9 @@ package com.javarush.task.task21.task2108;
 Клонирование растений
 */
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public class Solution {
     public static void main(String[] args) {
         Tree tree = new Tree("willow", new String[]{"s1", "s2", "s3", "s4"});
@@ -33,22 +36,22 @@ public class Solution {
         }
     }
 
-    public static class Tree extends Plant implements Cloneable{
+    public static class Tree extends Plant implements Cloneable {
         private String[] branches;
+
 
         public Tree(String name, String[] branches) {
             super(name);
             this.branches = branches;
         }
+        @Override
+        protected Object clone() throws CloneNotSupportedException {
+            return new Tree(getName(), branches == null ? null : branches.clone());
+        }
 
         public String[] getBranches() {
             return branches;
         }
-
-        @Override
-        protected Object clone() throws CloneNotSupportedException {
-            Tree tree = new Tree(getName(),branches);
-          return tree;
-        }
     }
+
 }
