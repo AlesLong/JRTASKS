@@ -10,6 +10,13 @@ public class Snake extends GameObject {
     private List<GameObject> snakeParts = new ArrayList<>();
     private static final String HEAD_SIGN = "\uD83D\uDC7E";
     private static final String BODY_SIGN = "\u26AB";
+    public boolean isAlive = true;
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
+    }
+
+    private Direction direction = Direction.LEFT;
 
 
     public Snake(int x, int y) {
@@ -20,9 +27,16 @@ public class Snake extends GameObject {
     }
 
     public void draw(Game game) {
-        game.setCellValue(snakeParts.get(0).x, snakeParts.get(0).y, HEAD_SIGN);
-        for (int i = 1; i < snakeParts.size(); i++) {
-            game.setCellValue(snakeParts.get(i).x, snakeParts.get(i).y, BODY_SIGN);
+        if (isAlive) {
+            game.setCellValueEx(snakeParts.get(0).x, snakeParts.get(0).y, Color.NONE, HEAD_SIGN, Color.BLUEVIOLET, 75);
+            for (int i = 1; i < snakeParts.size(); i++) {
+                game.setCellValueEx(snakeParts.get(i).x, snakeParts.get(i).y, Color.NONE, BODY_SIGN, Color.BLUEVIOLET, 75);
+            }
+        } else {
+            game.setCellValueEx(snakeParts.get(0).x, snakeParts.get(0).y, Color.NONE, HEAD_SIGN, Color.RED, 75);
+            for (int i = 1; i < snakeParts.size(); i++) {
+                game.setCellValueEx(snakeParts.get(i).x, snakeParts.get(i).y, Color.NONE, BODY_SIGN, Color.RED, 75);
+            }
         }
     }
 }
