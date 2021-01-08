@@ -13,6 +13,7 @@ public class MinesweeperGame extends Game {
     private int countMinesOnField;
     private int countFlags;
     private int countClosedTiles = SIDE * SIDE;
+    private int score;
 
     private static final String MINE = "\uD83D\uDCA3";
     private static final String FLAG = "\uD83D\uDEA9";
@@ -91,8 +92,10 @@ public class MinesweeperGame extends Game {
             return;
         }
         gameObject.isOpen = true;
+
         countClosedTiles--;
         setCellColor(x, y, Color.GREEN);
+
         if (gameObject.isMine) {
             setCellValueEx(gameObject.x, gameObject.y, Color.RED, MINE);
             gameOver();
@@ -103,14 +106,18 @@ public class MinesweeperGame extends Game {
             for (GameObject neighbor : neighbors) {
                 if (!neighbor.isOpen) {
                     openTile(neighbor.x, neighbor.y);
+
                 }
             }
         } else {
             setCellNumber(x, y, gameObject.countMineNeighbors);
+            score+=5;
+            setScore(score);
         }
 
         if (countClosedTiles == countMinesOnField) {
             win();
+
         }
     }
 
