@@ -4,12 +4,26 @@ public class Rocket extends GameObject {
     private double speedY = 0;
     private double speedX = 0;
     private double boost = 0.05;
+    private double slowdown = boost / 10;
 
     public Rocket(double x, double y) {
         super(x, y, ShapeMatrix.ROCKET);
     }
 
     public void move(boolean isUpPressed, boolean isLeftPressed, boolean isRightPressed) {
+        if (!isLeftPressed && !isRightPressed && speedX >= 0 - slowdown && speedX <= slowdown) {
+            speedX = 0;
+            x += speedX;
+        }
+        if (!isLeftPressed && !isRightPressed && speedX > slowdown) {
+            speedX -= slowdown;
+            x += speedX;
+        }
+        if (!isLeftPressed && !isRightPressed && speedX < 0 - slowdown) {
+            speedX += slowdown;
+            x += speedX;
+        }
+
         if (isUpPressed) {
             speedY -= boost;
         }
@@ -25,6 +39,7 @@ public class Rocket extends GameObject {
             speedX += boost;
             x += speedX;
         }
+
         checkBorders();
     }
 
@@ -34,7 +49,7 @@ public class Rocket extends GameObject {
             speedX = 0;
         }
         if (x + width > MoonLanderGame.WIDTH) {
-            x = MoonLanderGame.WIDTH-width;
+            x = MoonLanderGame.WIDTH - width;
             speedX = 0;
         }
         if (y < 0) {

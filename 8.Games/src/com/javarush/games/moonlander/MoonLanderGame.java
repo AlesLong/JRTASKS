@@ -16,6 +16,7 @@ public class MoonLanderGame extends Game {
     public void initialize() {
         setScreenSize(WIDTH, HEIGHT);
         createGame();
+        createGame();
         showGrid(false);
     }
 
