@@ -79,4 +79,8 @@ public class Rocket extends GameObject {
     public void land() {
         y -= 1;
     }
+
+    public void crash() {
+        matrix = ShapeMatrix.ROCKET_CRASH;
+    }
 }
