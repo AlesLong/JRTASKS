@@ -8,6 +8,9 @@ public class MoonLanderGame extends Game {
     public final static int HEIGHT = 64;
     private Rocket rocket;
     private GameObject landscape;
+    private boolean isUpPressed;
+    private boolean isLeftPressed;
+    private boolean isRightPressed;
 
 
     public void initialize() {
@@ -17,6 +20,9 @@ public class MoonLanderGame extends Game {
     }
 
     private void createGame() {
+        isLeftPressed = false;
+        isUpPressed = false;
+        isRightPressed = false;
         createGameObjects();
         drawScene();
         setTurnTimer(50);
