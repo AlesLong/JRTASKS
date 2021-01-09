@@ -13,7 +13,7 @@ public class Rocket extends GameObject {
     private double speedX = 0;
     private double boost = 0.05;
     private double slowdown = boost / 10;
-
+    
     private RocketFire downFire;
     private RocketFire leftFire;
     private RocketFire rightFire;

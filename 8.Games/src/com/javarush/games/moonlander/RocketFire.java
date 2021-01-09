@@ -1,17 +1,14 @@
 package com.javarush.games.moonlander;
 
+import com.javarush.engine.cell.Game;
+import com.javarush.engine.cell.*;
+
 import java.util.List;
 
 public class RocketFire extends GameObject {
     private List<int[][]> frames;
     private int frameIndex;
     private boolean isVisible;
-
-  //  public RocketFire(double x, double y, int[][] matrix, List<int[][]> frameList) {
-//
-  //      this.frames = frameList;
-//
-  //  }
 
     public RocketFire(List<int[][]> frameList) {
         super(0, 0, frameList.get(0));
@@ -20,8 +17,18 @@ public class RocketFire extends GameObject {
         isVisible = false;
     }
 
-    // public RocketFire(double x, double y, int[][] matrix, List<int[][]> frames) {
-    //     super(x, y, matrix);
-    //     this.frames = frames;
-    // }
+    private void nextFrame() {
+        frameIndex++;
+        if (frameIndex >= frames.size()) {
+            frameIndex = 0;
+        }
+        matrix = frames.get(frameIndex);
+    }
+    public void draw(Game game){
+        if(!isVisible){
+            return;
+        }
+        nextFrame();
+        super.draw(game);
+    }
 }
