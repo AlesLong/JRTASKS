@@ -7,16 +7,23 @@ public class MoonLanderGame extends Game {
     public final static int WIDTH = 64;
     public final static int HEIGHT = 64;
     private Rocket rocket;
+    private GameObject landscape;
 
     public void initialize() {
         setScreenSize(WIDTH, HEIGHT);
         createGame();
+        showGrid(false);
     }
 
     private void createGame() {
-        rocket = new Rocket(WIDTH / 2, 0);
+        createGameObjects();
         drawScene();
 
+    }
+
+    private void createGameObjects() {
+        rocket = new Rocket(WIDTH / 2, 0);
+        landscape = new GameObject(0, 25, ShapeMatrix.LANDSCAPE);
     }
 
     private void drawScene() {
@@ -26,5 +33,6 @@ public class MoonLanderGame extends Game {
             }
         }
         rocket.draw(this);
+        landscape.draw(this);
     }
 }
