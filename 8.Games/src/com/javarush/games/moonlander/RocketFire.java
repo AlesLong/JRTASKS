@@ -24,11 +24,20 @@ public class RocketFire extends GameObject {
         }
         matrix = frames.get(frameIndex);
     }
-    public void draw(Game game){
-        if(!isVisible){
+
+    public void draw(Game game) {
+        if (!isVisible) {
             return;
         }
         nextFrame();
         super.draw(game);
+    }
+
+    public void show() {
+        isVisible = true;
+    }
+
+    public void hide() {
+        isVisible = false;
     }
 }
