@@ -7,6 +7,12 @@ public class RocketFire extends GameObject {
     private int frameIndex;
     private boolean isVisible;
 
+  //  public RocketFire(double x, double y, int[][] matrix, List<int[][]> frameList) {
+//
+  //      this.frames = frameList;
+//
+  //  }
+
     public RocketFire(List<int[][]> frameList) {
         super(0, 0, frameList.get(0));
         this.frames = frameList;
@@ -14,4 +20,8 @@ public class RocketFire extends GameObject {
         isVisible = false;
     }
 
+    // public RocketFire(double x, double y, int[][] matrix, List<int[][]> frames) {
+    //     super(x, y, matrix);
+    //     this.frames = frames;
+    // }
 }
