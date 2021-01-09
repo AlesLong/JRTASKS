@@ -12,6 +12,7 @@ public class MoonLanderGame extends Game {
     private boolean isLeftPressed;
     private boolean isRightPressed;
     private GameObject platform;
+    private boolean isGameStopped;
 
 
     public void initialize() {
@@ -22,6 +23,7 @@ public class MoonLanderGame extends Game {
     }
 
     private void createGame() {
+        isGameStopped = false;
         isLeftPressed = false;
         isUpPressed = false;
         isRightPressed = false;
@@ -99,7 +101,10 @@ public class MoonLanderGame extends Game {
     }
 
     private void win() {
-
+        rocket.land();
+        isGameStopped = true;
+        showMessageDialog(Color.GOLDENROD, "U WIN, ARMSTRONG!",Color.CORAL,50);
+        stopTurnTimer();
     }
 
     private void gameOver() {
