@@ -6,6 +6,7 @@ import com.javarush.engine.cell.*;
 public class MoonLanderGame extends Game {
     public final static int WIDTH = 64;
     public final static int HEIGHT = 64;
+    private Rocket rocket;
 
     public void initialize() {
         setScreenSize(WIDTH, HEIGHT);
@@ -13,7 +14,9 @@ public class MoonLanderGame extends Game {
     }
 
     private void createGame() {
+        rocket = new Rocket(WIDTH / 2, 0);
         drawScene();
+
     }
 
     private void drawScene() {
@@ -22,5 +25,6 @@ public class MoonLanderGame extends Game {
                 setCellColor(i, j, Color.ALICEBLUE);
             }
         }
+        rocket.draw(this);
     }
 }
