@@ -41,4 +41,11 @@ public class RacerGame extends Game {
             setCellColor(CENTER_X, i, Color.WHITE);
         }
     }
+
+    @Override
+    public void setCellColor(int x, int y, Color color) {
+        if (0 <= x && x < WIDTH && 0 <= y && y < WIDTH) {
+            super.setCellColor(x, y, color);
+        }
+    }
 }
