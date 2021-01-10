@@ -39,6 +39,7 @@ public class RoadManager {
         for (RoadObject item : items) {
             item.move(boost + item.speed);
         }
+        deletePassedItems();
     }
 
     private boolean isThornExists() {
@@ -58,5 +59,9 @@ public class RoadManager {
 
     public void generateNewRoadObjects(Game game) {
         generateThorn(game);
+    }
+
+    private void deletePassedItems() {
+        items.removeIf(item -> item.y >= RacerGame.HEIGHT);
     }
 }
