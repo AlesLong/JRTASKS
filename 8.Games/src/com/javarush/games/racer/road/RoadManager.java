@@ -1,7 +1,9 @@
 package com.javarush.games.racer.road;
 
 import com.javarush.engine.cell.Game;
+import com.javarush.games.racer.PlayerCar;
 import com.javarush.games.racer.RacerGame;
+import com.javarush.games.racer.ShapeMatrix;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,4 +66,14 @@ public class RoadManager {
     private void deletePassedItems() {
         items.removeIf(item -> item.y >= RacerGame.HEIGHT);
     }
+
+    public boolean checkCrush(PlayerCar playerCar) {
+        for (int i = 0; i < items.size(); i++) {
+            if (items.get(i).isCollision(playerCar)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
