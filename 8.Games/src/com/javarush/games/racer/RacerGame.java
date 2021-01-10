@@ -9,10 +9,13 @@ public class RacerGame extends Game {
     public static final int HEIGHT = 64;
     public static final int CENTER_X = WIDTH / 2;
     public static final int ROADSIDE_WIDTH = 14;
+    private static final int RACE_GOAL_CARS_COUNT = 40;
+
     private RoadMarking roadMarking;
     private PlayerCar player;
     private RoadManager roadManager;
     private boolean isGameStopped;
+    private FinishLine finishLine;
 
     public void initialize() {
         showGrid(false);
@@ -21,6 +24,7 @@ public class RacerGame extends Game {
     }
 
     private void createGame() {
+        finishLine = new FinishLine();
         isGameStopped = false;
         player = new PlayerCar();
         roadMarking = new RoadMarking();
@@ -34,6 +38,7 @@ public class RacerGame extends Game {
         roadMarking.draw(this);
         player.draw(this);
         roadManager.draw(this);
+        finishLine.draw(this);
     }
 
     private void drawField() {
@@ -65,6 +70,7 @@ public class RacerGame extends Game {
     private void moveAll() {
         roadMarking.move(player.speed);
         roadManager.move(player.speed);
+        finishLine.move(player.speed);
         player.move();
 
     }
