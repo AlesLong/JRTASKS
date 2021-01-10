@@ -136,7 +136,7 @@ public class RacerGame extends Game {
 
     private void gameOver() {
         isGameStopped = true;
-        showMessageDialog(Color.DARKORANGE, "ГАМОВЕР", Color.BURLYWOOD, 30);
+        showMessageDialog(Color.DARKORANGE, "ARE U DRUNK?!", Color.BURLYWOOD, 30);
         stopTurnTimer();
         player.stop();
     }
