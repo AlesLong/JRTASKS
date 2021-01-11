@@ -9,8 +9,33 @@ import java.io.InputStreamReader;
 */
 
 public class Solution {
-    public static void main(String[] args) {
-        //add your code here
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String url = reader.readLine();
+        String paramsSubString = url.substring(url.lastIndexOf("?") + 1);
+        String[] splitParams = paramsSubString.split("&");
+        String objValue = null;
+
+        StringBuilder resultBuilder = new StringBuilder();
+        for (String splitParam : splitParams) {
+            String[] paramAndValue = splitParam.split("=");
+            resultBuilder.append(paramAndValue[0]);
+            resultBuilder.append(" ");
+
+            if (paramAndValue[0].equals("obj")) {
+                objValue = paramAndValue[1];
+            }
+        }
+
+        System.out.println(resultBuilder.toString().trim());
+
+        if (objValue != null) {
+            try {
+                alert(Double.parseDouble(objValue));
+            } catch (NumberFormatException nfe) {
+                alert(objValue);
+            }
+        }
     }
 
     public static void alert(double value) {
