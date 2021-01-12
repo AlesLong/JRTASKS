@@ -47,4 +47,9 @@ public class Controller {
         model.deleteUserById(id);
         onShowAllUsers();
     }
+
+    public void onUserChange(String name, long id, int level) {
+        model.changeUserData(name, id, level);
+        onShowAllUsers();
+    }
 }
