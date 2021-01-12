@@ -43,4 +43,8 @@ public class Controller {
         editUserView.refresh(getModel().getModelData());
     }
 
+    public void onUserDelete(long id) {
+        model.deleteUserById(id);
+        onShowAllUsers();
+    }
 }
