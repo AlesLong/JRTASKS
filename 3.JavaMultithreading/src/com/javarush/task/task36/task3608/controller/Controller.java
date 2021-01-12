@@ -5,14 +5,19 @@ import com.javarush.task.task36.task3608.view.EditUserView;
 import com.javarush.task.task36.task3608.view.UsersView;
 
 public class Controller {
-    //controller cannot contain business logic, only operate with views
 
     private Model model;
+
     private UsersView usersView;
     private EditUserView editUserView;
 
+    public Model getModel() {
+        return model;
+    }
+
     public void setModel(Model model) {
         this.model = model;
+
     }
 
     public void setUsersView(UsersView usersView) {
@@ -25,11 +30,17 @@ public class Controller {
 
     public void onShowAllUsers() {
         model.loadUsers();
-        usersView.refresh(model.getModelData());
+        usersView.refresh(getModel().getModelData());
     }
 
     public void onShowAllDeletedUsers() {
         model.loadDeletedUsers();
-        usersView.refresh(model.getModelData());
+        usersView.refresh(getModel().getModelData());
     }
+
+    public void onOpenUserEditForm(long userId) {
+        model.loadUserById(userId);
+        editUserView.refresh(getModel().getModelData());
+    }
+
 }

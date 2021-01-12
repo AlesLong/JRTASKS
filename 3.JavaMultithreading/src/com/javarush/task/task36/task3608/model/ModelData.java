@@ -6,9 +6,10 @@ import java.util.List;
 
 public class ModelData {
 
-    private List<User> users;
-    private User activeUser;
+
     private boolean displayDeletedUserList;
+    private User activeUser;
+    private List<User> users;
 
     public List<User> getUsers() {
         return users;
@@ -18,19 +19,20 @@ public class ModelData {
         this.users = users;
     }
 
-    public User getActiveUser() {
-        return activeUser;
-    }
-
-    public void setActiveUser(User activeUser) {
-        this.activeUser = activeUser;
-    }
-
     public boolean isDisplayDeletedUserList() {
         return displayDeletedUserList;
     }
 
     public void setDisplayDeletedUserList(boolean displayDeletedUserList) {
         this.displayDeletedUserList = displayDeletedUserList;
+    }
+
+
+    public User getActiveUser() {
+        return activeUser;
+    }
+
+    public void setActiveUser(User activeUser) {
+        this.activeUser = activeUser;
     }
 }
