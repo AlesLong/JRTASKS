@@ -2,6 +2,7 @@ package com.javarush.games.spaceinvaders.gameobjects;
 
 import com.javarush.engine.cell.Game;
 import com.javarush.games.spaceinvaders.ShapeMatrix;
+import com.javarush.games.spaceinvaders.SpaceInvadersGame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,26 @@ public class EnemyFleet {
 
     public void draw(Game game) {
         ships.forEach(enemyShip -> enemyShip.draw(game));
+    }
+
+    private double getLeftBorder() {
+        double left = SpaceInvadersGame.WIDTH;
+        for (GameObject ship : ships) {
+            if (ship.x < left) {
+                left = ship.x;
+            }
+        }
+        return left;
+    }
+
+    private double getRightBorder() {
+        double right = 0;
+        for (GameObject ship : ships) {
+            if (ship.x + ship.width > right) {
+                right = ship.x + ship.width;
+            }
+        }
+        return right;
     }
 }
 
