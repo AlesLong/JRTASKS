@@ -1,5 +1,6 @@
 package com.javarush.games.spaceinvaders.gameobjects;
 
+import com.javarush.engine.cell.Game;
 import com.javarush.games.spaceinvaders.ShapeMatrix;
 
 import java.util.ArrayList;
@@ -12,8 +13,21 @@ public class EnemyFleet {
 
     private List<EnemyShip> ships;
 
+    public EnemyFleet() {
+        createShips();
+    }
+
     private void createShips() {
         ships = new ArrayList<>();
+        for (int i = 0; i < COLUMNS_COUNT; i++) {
+            for (int j = 0; j < ROWS_COUNT; j++) {
+                ships.add(new EnemyShip(i * STEP, j * STEP + 12));
+            }
+        }
+    }
+
+    public void draw(Game game) {
+        ships.forEach(enemyShip -> enemyShip.draw(game));
     }
 }
 
