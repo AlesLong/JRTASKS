@@ -26,6 +26,14 @@ public class Solution {
     }
 
     public static int getRectangleCount(byte[][] a) {
-        return 0;
+        int countRectangle = 0;
+        for (int i = 1; i < a.length-1; i++) {
+            for (int j = 1; j < a.length-1; j++) {
+
+            }
+        }
+
+
+        return countRectangle;
     }
 }
