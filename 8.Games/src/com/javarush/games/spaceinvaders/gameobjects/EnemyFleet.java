@@ -59,7 +59,17 @@ public class EnemyFleet {
     }
 
     public void move() {
-
+        if (!ships.isEmpty()) {
+            if (direction == Direction.LEFT && getLeftBorder() < 0) {
+                direction = Direction.RIGHT;
+                ships.forEach(enemyShip -> enemyShip.move(Direction.DOWN, getSpeed()));
+            }
+            if (direction == Direction.RIGHT && getRightBorder() > SpaceInvadersGame.WIDTH) {
+                direction = Direction.LEFT;
+                ships.forEach(enemyShip -> enemyShip.move(Direction.DOWN, getSpeed()));
+            }
+            ships.forEach(enemyShip -> enemyShip.move(direction, getSpeed()));
+        }
     }
 }
 
