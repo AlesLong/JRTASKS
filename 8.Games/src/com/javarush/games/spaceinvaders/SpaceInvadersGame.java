@@ -2,6 +2,7 @@ package com.javarush.games.spaceinvaders;
 
 import com.javarush.engine.cell.Game;
 import com.javarush.engine.cell.*;
+import com.javarush.games.spaceinvaders.gameobjects.Bullet;
 import com.javarush.games.spaceinvaders.gameobjects.EnemyFleet;
 import com.javarush.games.spaceinvaders.gameobjects.Star;
 
@@ -16,6 +17,7 @@ public class SpaceInvadersGame extends Game {
 
 
     private List<Star> stars;
+    private List<Bullet> enemyBullets;
 
     private EnemyFleet enemyFleet;
 
@@ -26,6 +28,7 @@ public class SpaceInvadersGame extends Game {
     }
 
     private void createGame() {
+        enemyBullets = new ArrayList<>();
         enemyFleet = new EnemyFleet();
         createStars();
         drawScene();
@@ -35,6 +38,10 @@ public class SpaceInvadersGame extends Game {
     private void drawScene() {
         drawField();
         enemyFleet.draw(this);
+
+        for (Bullet bullet : enemyBullets) {
+            bullet.draw(this);
+        }
     }
 
     private void drawField() {
@@ -57,11 +64,27 @@ public class SpaceInvadersGame extends Game {
 
     private void moveSpaceObjects() {
         enemyFleet.move();
+        enemyBullets.forEach(Bullet::move);
     }
 
     @Override
     public void onTurn(int step) {
         moveSpaceObjects();
+        check();
+
+        Bullet bullet = enemyFleet.fire(this);
+        if (bullet != null) {
+            enemyBullets.add(bullet);
+        }
+
         drawScene();
+    }
+
+    private void removeDeadBullets() {
+        enemyBullets.removeIf(bullet -> !bullet.isAlive || bullet.y >= HEIGHT - 1);
+    }
+
+    private void check() {
+        removeDeadBullets();
     }
 }
