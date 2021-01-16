@@ -91,7 +91,7 @@ public class SpaceInvadersGame extends Game {
     }
 
     private void check() {
-        if(!playerShip.isAlive){
+        if (!playerShip.isAlive) {
             stopGameWithDelay();
         }
         playerShip.verifyHit(enemyBullets);
@@ -111,8 +111,22 @@ public class SpaceInvadersGame extends Game {
 
     private void stopGameWithDelay() {
         animationsCount++;
-        if(animationsCount>=10){
+        if (animationsCount >= 10) {
             stopGame(playerShip.isAlive);
         }
+    }
+
+    @Override
+    public void onKeyPress(Key key) {
+        if (key == Key.SPACE && isGameStopped) {
+            createGame();
+        }
+        if (key == Key.LEFT) {
+            playerShip.setDirection(Direction.LEFT);
+        }
+        if (key == Key.RIGHT) {
+            playerShip.setDirection(Direction.RIGHT);
+        }
+
     }
 }
