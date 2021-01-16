@@ -13,6 +13,9 @@ public class SpaceInvadersGame extends Game {
     public static final int HEIGHT = 64;
     public static final int COMPLEXITY = 5;
 
+    private int animationsCount;
+
+    private boolean isGameStopped;
 
     private List<Star> stars;
     private List<Bullet> enemyBullets;
@@ -28,6 +31,8 @@ public class SpaceInvadersGame extends Game {
     }
 
     private void createGame() {
+        animationsCount = 0;
+        isGameStopped = false;
         enemyBullets = new ArrayList<>();
         enemyFleet = new EnemyFleet();
         playerShip = new PlayerShip();
@@ -86,7 +91,28 @@ public class SpaceInvadersGame extends Game {
     }
 
     private void check() {
+        if(!playerShip.isAlive){
+            stopGameWithDelay();
+        }
         playerShip.verifyHit(enemyBullets);
         removeDeadBullets();
+    }
+
+    private void stopGame(boolean isWin) {
+        isGameStopped = true;
+        stopTurnTimer();
+        if (isWin) {
+            showMessageDialog(Color.BLACK, "Nice shots!", Color.GREEN, 25);
+        }
+        if (!isWin) {
+            showMessageDialog(Color.BLACK, "Death star", Color.RED, 25);
+        }
+    }
+
+    private void stopGameWithDelay() {
+        animationsCount++;
+        if(animationsCount>=10){
+            stopGame(playerShip.isAlive);
+        }
     }
 }
