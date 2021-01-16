@@ -1,5 +1,6 @@
 package com.javarush.games.spaceinvaders.gameobjects;
 
+import com.javarush.engine.cell.Game;
 import com.javarush.games.spaceinvaders.Direction;
 import com.javarush.games.spaceinvaders.ShapeMatrix;
 import com.javarush.games.spaceinvaders.SpaceInvadersGame;
@@ -13,6 +14,24 @@ public class PlayerShip extends Ship {
     public void setDirection(Direction newDirection) {
         if (newDirection != Direction.DOWN) {
             this.direction = newDirection;
+        }
+    }
+
+    public void move() {
+        if (!isAlive) {
+            return;
+        }
+        if (direction == Direction.LEFT) {
+            x--;
+        }
+        if (direction == Direction.RIGHT) {
+            x++;
+        }
+        if (x < 0) {
+            x = 0;
+        }
+        if (x + width > SpaceInvadersGame.WIDTH) {
+            x = SpaceInvadersGame.WIDTH - width;
         }
     }
 

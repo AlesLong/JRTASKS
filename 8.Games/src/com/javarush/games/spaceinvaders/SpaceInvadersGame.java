@@ -69,6 +69,7 @@ public class SpaceInvadersGame extends Game {
     }
 
     private void moveSpaceObjects() {
+        playerShip.move();
         enemyFleet.move();
         enemyBullets.forEach(Bullet::move);
     }
