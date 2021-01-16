@@ -10,7 +10,6 @@ import java.util.List;
 public class PlayerShip extends Ship {
 
 
-
     private Direction direction = Direction.UP;
 
     public void setDirection(Direction newDirection) {
@@ -71,5 +70,13 @@ public class PlayerShip extends Ship {
         isAlive = false;
         setAnimatedView(ShapeMatrix.KILL_PLAYER_ANIMATION_FIRST, ShapeMatrix.KILL_PLAYER_ANIMATION_SECOND,
                 ShapeMatrix.KILL_PLAYER_ANIMATION_THIRD, ShapeMatrix.DEAD_PLAYER);
+    }
+
+    @Override
+    public Bullet fire() {
+        if (!isAlive) {
+            return null;
+        }
+        return new Bullet(x + 2, y - ShapeMatrix.BULLET.length, Direction.UP);
     }
 }

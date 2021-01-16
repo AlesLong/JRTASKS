@@ -19,6 +19,7 @@ public class SpaceInvadersGame extends Game {
 
     private List<Star> stars;
     private List<Bullet> enemyBullets;
+    private List<Bullet> playerBullets;
 
     private EnemyFleet enemyFleet;
 
@@ -33,6 +34,7 @@ public class SpaceInvadersGame extends Game {
     private void createGame() {
         animationsCount = 0;
         isGameStopped = false;
+        playerBullets = new ArrayList<>();
         enemyBullets = new ArrayList<>();
         enemyFleet = new EnemyFleet();
         playerShip = new PlayerShip();
@@ -43,6 +45,9 @@ public class SpaceInvadersGame extends Game {
 
     private void drawScene() {
         drawField();
+        for (Bullet bullet : playerBullets) {
+            bullet.draw(this);
+        }
         enemyFleet.draw(this);
         playerShip.draw(this);
         for (Bullet bullet : enemyBullets) {
@@ -72,6 +77,7 @@ public class SpaceInvadersGame extends Game {
         playerShip.move();
         enemyFleet.move();
         enemyBullets.forEach(Bullet::move);
+        playerBullets.forEach(Bullet::move);
     }
 
     @Override
