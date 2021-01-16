@@ -9,12 +9,18 @@ import java.util.List;
 
 public class PlayerShip extends Ship {
 
+
+
     private Direction direction = Direction.UP;
 
     public void setDirection(Direction newDirection) {
         if (newDirection != Direction.DOWN) {
             this.direction = newDirection;
         }
+    }
+
+    public Direction getDirection() {
+        return direction;
     }
 
     public void move() {
