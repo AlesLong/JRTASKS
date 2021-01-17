@@ -23,6 +23,7 @@ public class EnemyFleet {
 
     private void createShips() {
         ships = new ArrayList<>();
+        ships.add(new Boss(STEP * COLUMNS_COUNT / 2 - ShapeMatrix.BOSS_ANIMATION_FIRST.length / 2 - 1, 5));
         for (int i = 0; i < COLUMNS_COUNT; i++) {
             for (int j = 0; j < ROWS_COUNT; j++) {
                 ships.add(new EnemyShip(i * STEP, j * STEP + 12));
