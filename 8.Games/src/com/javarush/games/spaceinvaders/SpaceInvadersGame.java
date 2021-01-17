@@ -14,6 +14,7 @@ public class SpaceInvadersGame extends Game {
     public static final int COMPLEXITY = 5;
     private static final int PLAYER_BULLETS_MAX = 1;
 
+    private int score;
     private int animationsCount;
 
     private boolean isGameStopped;
@@ -33,6 +34,7 @@ public class SpaceInvadersGame extends Game {
     }
 
     private void createGame() {
+        score = 0;
         animationsCount = 0;
         isGameStopped = false;
         playerBullets = new ArrayList<>();
@@ -83,6 +85,7 @@ public class SpaceInvadersGame extends Game {
 
     @Override
     public void onTurn(int step) {
+        setScore(score);
         moveSpaceObjects();
         check();
 
@@ -110,7 +113,7 @@ public class SpaceInvadersGame extends Game {
         if (!playerShip.isAlive) {
             stopGameWithDelay();
         }
-        enemyFleet.verifyHit(playerBullets);
+        score += enemyFleet.verifyHit(playerBullets);
         enemyFleet.deleteHiddenShips();
         playerShip.verifyHit(enemyBullets);
         removeDeadBullets();
