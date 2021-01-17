@@ -42,7 +42,7 @@ public class Ship extends GameObject {
 
     public void nextFrame() {
         frameIndex += 1;
-        if(frameIndex>=frames.size()){
+        if (frameIndex >= frames.size()) {
             return;
         }
         matrix = frames.get(frameIndex);
@@ -52,5 +52,13 @@ public class Ship extends GameObject {
     public void draw(Game game) {
         super.draw(game);
         nextFrame();
+    }
+
+    public boolean isVisible() {
+        if (!isAlive && frameIndex >= frames.size()) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
