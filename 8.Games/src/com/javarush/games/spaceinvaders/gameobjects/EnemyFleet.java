@@ -5,8 +5,8 @@ import com.javarush.games.spaceinvaders.Direction;
 import com.javarush.games.spaceinvaders.ShapeMatrix;
 import com.javarush.games.spaceinvaders.SpaceInvadersGame;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class EnemyFleet {
     private static final int ROWS_COUNT = 3;
@@ -96,6 +96,27 @@ public class EnemyFleet {
 
     public void deleteHiddenShips() {
         ships.removeIf(enemyShip -> !enemyShip.isVisible());
+    }
+
+    public double getBottomBorder() {
+        try {
+            if (ships != null && !ships.isEmpty()) {
+                double max = ships.get(0).y + ships.get(0).height;
+                for (EnemyShip enemyShip : ships) {
+                    if (enemyShip.y + enemyShip.height > max)
+                        max = enemyShip.y + enemyShip.height;
+                }
+                return max;
+            } else {
+                throw new NoSuchElementException();
+            }
+        } catch (NoSuchElementException e) {
+            return 0;
+        }
+    }
+
+    public int getShipsCount() {
+        return ships.size();
     }
 }
 
