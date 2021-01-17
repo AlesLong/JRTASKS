@@ -8,6 +8,8 @@ import java.util.List;
 
 public class Ship extends GameObject {
 
+    private boolean loopAnimation = false;
+
     public boolean isAlive = true;
 
     private List<int[][]> frames;
@@ -34,14 +36,20 @@ public class Ship extends GameObject {
         isAlive = false;
     }
 
-    public void setAnimatedView(int[][]... viewFrames) {
-        setMatrix(viewFrames[0]);
-        frames = Arrays.asList(viewFrames);
-        frameIndex = 0;
-    }
+    //  public void setAnimatedView(int[][]... viewFrames) {
+    //      setMatrix(viewFrames[0]);
+    //      frames = Arrays.asList(viewFrames);
+    //      frameIndex = 0;
+    //  }
 
     public void nextFrame() {
         frameIndex += 1;
+        if (frameIndex >= frames.size() && !loopAnimation) {
+            return;
+        }
+        if (frameIndex >= frames.size() && loopAnimation) {
+            frameIndex = 0;
+        }
         if (frameIndex >= frames.size()) {
             return;
         }
@@ -60,5 +68,9 @@ public class Ship extends GameObject {
         } else {
             return true;
         }
+    }
+
+    public void setAnimatedView(boolean isLoopAnimation, int[][]... viewFrames) {
+        this.loopAnimation = isLoopAnimation;
     }
 }
