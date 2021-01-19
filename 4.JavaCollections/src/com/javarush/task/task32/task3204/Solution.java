@@ -16,9 +16,9 @@ public class Solution {
         //incorrect generation
         ByteArrayOutputStream is = new ByteArrayOutputStream();
         Basket[] baskets = new Basket[3];
-        baskets[0] = new com.javarush.task.task32.task3204.Solution.Basket('0', '9');
-        baskets[1] = new com.javarush.task.task32.task3204.Solution.Basket('a', 'z');
-        baskets[2] = new com.javarush.task.task32.task3204.Solution.Basket('A', 'Z');
+        baskets[0] = new Basket('0', '9');
+        baskets[1] = new Basket('a', 'z');
+        baskets[2] = new Basket('A', 'Z');
         int i = 0;
         for (; i < 5; i++) {
             int index = (int) (Math.random() * 3);
@@ -39,7 +39,7 @@ public class Solution {
         return is;
     }
 
-    private static void generateChar(ByteArrayOutputStream is, com.javarush.task.task32.task3204.Solution.Basket[] baskets, int index) {
+    private static void generateChar(ByteArrayOutputStream is, Basket[] baskets, int index) {
         Basket basket = baskets[index];
         is.write((char) basket.getRandom());
     }
