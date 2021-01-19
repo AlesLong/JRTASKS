@@ -1,7 +1,10 @@
 package com.javarush.task.task22.task2213;
 
 public class Tetris {
+    static Tetris game;
+
     private Field field;
+    private Figure figure;
 
     public Field getField() {
         return field;
@@ -19,7 +22,7 @@ public class Tetris {
         this.figure = figure;
     }
 
-    private Figure figure;
+
 
     public void run() {
 
@@ -31,6 +34,7 @@ public class Tetris {
 
 
     public static void main(String[] args) {
-
+        game = new Tetris();
+        game.run();
     }
 }
