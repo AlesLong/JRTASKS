@@ -23,7 +23,6 @@ public class Tetris {
     }
 
 
-
     public void run() {
 
     }
@@ -31,7 +30,6 @@ public class Tetris {
     public void step() {
 
     }
-
 
     public static void main(String[] args) {
         game = new Tetris();
