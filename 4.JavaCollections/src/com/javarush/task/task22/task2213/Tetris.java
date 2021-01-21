@@ -2,22 +2,31 @@ package com.javarush.task.task22.task2213;
 
 import java.awt.event.KeyEvent;
 
-
+/**
+ * Класс Tetris - содержит основной функционал игры.
+ */
 public class Tetris {
-    private Field field;
-    private Figure figure;
 
-    private boolean isGameOver;
+    private Field field;                //Поле с клетками
+    private Figure figure;              //Фигурка
+
+    private boolean isGameOver;         //Игра Окончена?
 
     public Tetris(int width, int height) {
         field = new Field(width, height);
         figure = null;
     }
 
+    /**
+     * Геттер переменной field.
+     */
     public Field getField() {
         return field;
     }
 
+    /**
+     * Геттер переменной figure.
+     */
     public Figure getFigure() {
         return figure;
     }
@@ -67,32 +76,33 @@ public class Tetris {
         System.out.println("Game Over");
     }
 
-    /**
-     * Один шаг игры
-     */
     public void step() {
+        //опускам фигурку вниз
         figure.down();
+
+        //если разместить фигурку на текущем месте невозможно
         if (!figure.isCurrentPositionAvailable()) {
-            figure.up();
-            figure.landed();
-            field.removeFullLines();
-            figure = FigureFactory.createRandomFigure(field.getWidth() / 2, 0);
+            figure.up();                    //поднимаем обратно
+            figure.landed();                //приземляем
+
+            isGameOver = figure.getY() <= 1;//если фигурка приземлилась на самом верху - игра окончена
+
+            field.removeFullLines();        //удаляем заполненные линии
+
+            figure = FigureFactory.createRandomFigure(field.getWidth() / 2, 0); //создаем новую фигурку
         }
-
-
-        //если разместить фигурку на текущем месте невозможно:
-        //поднимаем обратно
-        //приземляем
-        //удаляем заполненные линии
-        //создаем новую фигурку
-
     }
 
-
+    /**
+     * Сеттер для figure
+     */
     public void setFigure(Figure figure) {
         this.figure = figure;
     }
 
+    /**
+     * Сеттер для field
+     */
     public void setField(Field field) {
         this.field = field;
     }
