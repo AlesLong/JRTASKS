@@ -26,6 +26,7 @@ public class Solution {
                 .replaceFirst(
                         one.getClass().getSimpleName().toLowerCase(),
                         resultClassObject.getSimpleName().toLowerCase());
+        System.out.println(str);
         return mapper.readValue(str, resultClassObject);
     }
 
