@@ -29,11 +29,12 @@ public class Solution {
         ObjectMapper mapper = new ObjectMapper();
         mapper.writeValue(writer, object);
     }
-   //@JsonSubTypes({
-   //        @JsonSubTypes.Type(value=Cat.class, name="wildAnimal"),
-   //        @JsonSubTypes.Type(value=Cat.class, weight="over")
-   //})
 
+    //@JsonSubTypes({
+    //        @JsonSubTypes.Type(value=Cat.class, name="wildAnimal"),
+    //        @JsonSubTypes.Type(value=Cat.class, weight="over")
+    //})
+    @JsonAutoDetect
     public static class Cat {
         @JsonProperty(value = "wildAnimal")
         public String name;
