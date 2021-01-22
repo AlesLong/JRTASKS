@@ -4,13 +4,14 @@ package com.javarush.task.task25.task2515;
  * Класс для НЛО
  */
 public class Ufo extends BaseObject {
-    //картинка для отрисовки
+
+    //картинка корабля для отрисовки
     private static int[][] matrix = {
             {0, 0, 0, 0, 0},
             {0, 0, 1, 0, 0},
+            {0, 0, 1, 0, 0},
+            {1, 0, 1, 0, 1},
             {1, 1, 1, 1, 1},
-            {0, 1, 1, 1, 0},
-            {0, 0, 0, 0, 0},
     };
 
     public Ufo(double x, double y) {

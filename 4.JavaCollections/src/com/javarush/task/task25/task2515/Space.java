@@ -106,6 +106,9 @@ public class Space {
      */
     public void createUfo() {
         //тут нужно создать новый НЛО.
+        if (Space.game.getUfos().isEmpty()) {
+            Space.game.getUfos().add(new Ufo(width / 2, 0));
+        }
     }
 
     /**
@@ -114,7 +117,15 @@ public class Space {
      * б) падение ниже края игрового поля (бомба умирает)
      */
     public void checkBombs() {
-        //тут нужно проверить все возможные столкновения для каждой бомбы.
+        for (Bomb bomb : bombs) {
+            if (ship.isIntersect(bomb)) {
+                ship.die();
+                bomb.die();
+            }
+
+            if (bomb.getY() >= height)
+                bomb.die();
+        }
     }
 
     /**
@@ -123,7 +134,17 @@ public class Space {
      * б) вылет выше края игрового поля (ракета умирает)
      */
     public void checkRockets() {
-        //тут нужно проверить все возможные столкновения для каждой ракеты.
+        for (Rocket rocket : rockets) {
+            for (Ufo ufo : ufos) {
+                if (ufo.isIntersect(rocket)) {
+                    ufo.die();
+                    rocket.die();
+                }
+            }
+
+            if (rocket.getY() <= 0)
+                rocket.die();
+        }
     }
 
     /**
@@ -131,6 +152,9 @@ public class Space {
      */
     public void removeDead() {
         //тут нужно удалить все умершие объекты из списков (кроме космического корабля)
+        bombs.removeIf(el -> !el.isAlive());
+        rockets.removeIf(el -> !el.isAlive());
+        ufos.removeIf(el -> !el.isAlive());
     }
 
     /**
