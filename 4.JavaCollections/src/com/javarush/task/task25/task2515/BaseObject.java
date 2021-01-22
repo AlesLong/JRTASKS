@@ -15,8 +15,27 @@ public abstract class BaseObject {
         isAlive = true;
     }
 
+    public void draw() {
+
+    }
+
+    public void move() {
+
+    }
+
+    public void die() {
+        isAlive = false;
+    }
+
     public double getX() {
         return x;
+    }
+
+    public boolean isIntersect(BaseObject o) {
+        if (Math.sqrt(Math.pow((this.x - o.x), 2)
+                + Math.pow((this.y - o.y), 2)) < radius) {
+            return true;
+        } else return false;
     }
 
     public void setX(double x) {
