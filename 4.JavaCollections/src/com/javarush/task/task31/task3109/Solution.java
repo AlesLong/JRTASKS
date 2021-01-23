@@ -37,7 +37,7 @@ public class Solution {
             if ("xml".equals(ext)) {
                 properties.loadFromXML(is);
             } else {
-                
+
                 properties.load(is);
             }
 
