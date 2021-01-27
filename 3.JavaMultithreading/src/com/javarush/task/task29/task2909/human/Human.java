@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Human implements Alive{
+public class Human implements Alive {
     public static int nextId = 0;
     private int id;
     protected int age;
@@ -63,8 +63,14 @@ public class Human implements Alive{
     }
 
     public void live() {
+    }
 
+    public String getPosition() {
+        return "Человек";
+    }
 
+    public void printData() {
+        System.out.println(getPosition() + ": " + name);
     }
 
 
