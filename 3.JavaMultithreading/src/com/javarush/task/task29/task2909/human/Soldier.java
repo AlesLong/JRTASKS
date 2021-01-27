@@ -1,6 +1,8 @@
 package com.javarush.task.task29.task2909.human;
 
 public class Soldier extends Human {
+    protected int course;
+
     public Soldier(String name, int age) {
         super(name, age);
     }
@@ -11,7 +13,7 @@ public class Soldier extends Human {
         fight();
     }
 
-
+    
     public void fight() {
 
     }
@@ -19,5 +21,9 @@ public class Soldier extends Human {
 
     public void printSize() {
         System.out.println("Рост: " + size[0] + " Вес: " + size[1]);
+    }
+
+    public int getCourse() {
+        return course;
     }
 }
