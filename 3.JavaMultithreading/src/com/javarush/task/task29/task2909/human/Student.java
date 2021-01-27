@@ -1,8 +1,6 @@
 package com.javarush.task.task29.task2909.human;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Student extends Human {
     private double averageGrade;
@@ -11,12 +9,11 @@ public class Student extends Human {
     private Date endOfSession;
 
     public Student(String name, int age, double averageGrade) {
-        super(false);
+        super(name,age);
         this.name = name;
         this.age = age;
         this.averageGrade = averageGrade;
     }
-
 
 
     public void live() {

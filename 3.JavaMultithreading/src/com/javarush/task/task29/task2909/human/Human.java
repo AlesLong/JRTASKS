@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Human {
     public static int nextId = 0;
-    private List<Human> children = new ArrayList<>();
     private int id;
     protected int age;
     protected String name;
@@ -14,14 +13,12 @@ public class Human {
 
     protected int[] size;
 
-    protected boolean isSoldier;
-
     public static final int FIRST = 1;
     public static final int SECOND = 2;
     public static final int THIRD = 3;
     public static final int FOURTH = 4;
     private int bloodGroup;
-
+    private List<Human> children = new ArrayList<>();
 
     public void setBloodGroup(int code) {
         bloodGroup = code;
@@ -31,8 +28,9 @@ public class Human {
         return bloodGroup;
     }
 
-    public Human(boolean isSoldier) {
-        this.isSoldier = isSoldier;
+    public Human(String name, int age) {
+        this.name = name;
+        this.age = age;
         this.id = nextId;
         nextId++;
     }
@@ -69,18 +67,11 @@ public class Human {
         children.remove(human);
     }
 
-
-    // public void setChildren(List<Human> children) {
-    //     this.children = children;
-    // }
-
     public void live() {
-        if (isSoldier)
-            fight();
+
+
     }
 
-    public void fight() {
-    }
 
     public int getId() {
         return id;
