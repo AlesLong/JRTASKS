@@ -19,13 +19,11 @@ public class StudentsDataBase {
     public static void removeStudent(int index) {
         if (index >= 0 && index < students.size()) {
             students.remove(index);
-
         }
     }
 
     public static void findDimaOrSasha() {
         for (int i = 0; i < students.size(); i++) {
-
             if (students.get(i).getName().equals("Dima")) {
                 System.out.println("Студент Dima есть в базе.");
                 break;
@@ -34,7 +32,6 @@ public class StudentsDataBase {
             if (students.get(i).getName().equals("Sasha")) {
                 System.out.println("Студент Sasha есть в базе.");
                 break;
-               
             }
         }
     }

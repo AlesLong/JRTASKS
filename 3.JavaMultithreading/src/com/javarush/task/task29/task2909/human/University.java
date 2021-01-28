@@ -4,27 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class University {
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
     private String name;
     private int age;
     private List<Student> students = new ArrayList<>();
@@ -36,9 +15,8 @@ public class University {
 
     public Student getStudentWithAverageGrade(double averageGrade) {
         for (Student student : students) {
-            if (student.getAverageGrade() == averageGrade) {
+            if (student.getAverageGrade() == averageGrade)
                 return student;
-            }
         }
         return null;
     }
@@ -83,4 +61,23 @@ public class University {
         return students;
     }
 
+    public void setStudents(List<Student> students) {
+        this.students = students;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
