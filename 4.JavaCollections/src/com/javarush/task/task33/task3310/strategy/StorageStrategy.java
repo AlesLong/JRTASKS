@@ -1,7 +1,7 @@
 package com.javarush.task.task33.task3310.strategy;
 
 public interface StorageStrategy {
-
+    
     public boolean containsKey(Long key);
 
     public boolean containsValue(String value);
