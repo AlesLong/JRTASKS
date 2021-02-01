@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class FunctionalTest {
-
+    
     public void testStorage(Shortener shortener) {
         String s1 = "hello";
         String s2 = "world";
