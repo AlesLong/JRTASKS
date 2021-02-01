@@ -7,10 +7,10 @@ import java.util.Random;
 public class Helper {
     public static String generateRandomString() {
         SecureRandom random = new SecureRandom();
-        return new BigInteger(130, random).toString(36);
+        return new BigInteger(130, random).toString(32);
     }
 
-    public static void printMessage(String string) {
-        System.out.println(string);
+    public static void printMessage(String message) {
+        System.out.println(message);
     }
 }
