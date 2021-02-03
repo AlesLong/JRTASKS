@@ -5,8 +5,8 @@ package com.javarush.task.task26.task2608;
 */
 
 public class Solution {
-    Object lock1 = new Object();
-    Object lock2 = new Object();
+    final Object lock1 = new Object();
+    final Object lock2 = new Object();
     int var1;
     int var2;
     int var3;
