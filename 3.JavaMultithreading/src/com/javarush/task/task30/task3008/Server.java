@@ -1,9 +1,16 @@
 package com.javarush.task.task30.task3008;
 
+import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Server {
+
+    private static Map<String, Connection> connectionMap = new ConcurrentHashMap<>();
+
     public static void main(String[] args) {
         ConsoleHelper.writeMessage("Введите порт сервера:");
         int port = ConsoleHelper.readInt();
@@ -29,6 +36,17 @@ public class Server {
         @Override
         public void run() {
 
+        }
+    }
+
+    public static void sendBroadcastMessage(Message message) {
+        Set<String> keys = connectionMap.keySet();
+        for (String key:keys) {
+            try {
+                connectionMap.get(key).send(message);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
