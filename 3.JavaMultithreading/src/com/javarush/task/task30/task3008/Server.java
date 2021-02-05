@@ -38,6 +38,15 @@ public class Server {
 
         }
 
+        private void notifyUsers(Connection connection, String userName) throws IOException {
+            Set<String> keySet = connectionMap.keySet();
+            for (String key : keySet) {
+                if (!key.equals(userName)) {
+                    connection.send(new Message(MessageType.USER_ADDED, key));
+                }
+            }
+        }
+
         private String serverHandshake(Connection connection) throws IOException, ClassNotFoundException {
             while (true) {
                 connection.send(new Message(MessageType.NAME_REQUEST));
