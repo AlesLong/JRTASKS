@@ -35,7 +35,24 @@ public class Server {
 
         @Override
         public void run() {
+            ConsoleHelper.writeMessage("Установлено новое соединение с " + socket.getRemoteSocketAddress());
 
+            String userName = null;
+
+            try (Connection connection = new Connection(socket)) {
+                userName = serverHandshake(connection);
+                sendBroadcastMessage(new Message(MessageType.USER_ADDED, userName));
+                notifyUsers(connection, userName);
+                serverMainLoop(connection, userName);
+
+            } catch (IOException | ClassNotFoundException e) {
+                ConsoleHelper.writeMessage("Ошибка при обмене данными с " + socket.getRemoteSocketAddress());
+            }
+            if (userName != null) {
+                connectionMap.remove(userName);
+                sendBroadcastMessage(new Message(MessageType.USER_REMOVED, userName));
+            }
+            ConsoleHelper.writeMessage("Соединение с " + socket.getRemoteSocketAddress() + " закрыто.");
         }
 
         private void notifyUsers(Connection connection, String userName) throws IOException {
@@ -52,9 +69,7 @@ public class Server {
                 Message message = null;
                 try {
                     message = connection.receive();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (ClassNotFoundException e) {
+                } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
                 if (message.getType() == MessageType.TEXT) {
