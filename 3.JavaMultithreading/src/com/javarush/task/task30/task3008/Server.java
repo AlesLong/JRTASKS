@@ -47,6 +47,25 @@ public class Server {
             }
         }
 
+        private void serverMainLoop(Connection connection, String userName) {
+            while (true) {
+                Message message = null;
+                try {
+                    message = connection.receive();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                if (message.getType() == MessageType.TEXT) {
+                    ConsoleHelper.writeMessage(userName + ": " + message);
+                    sendBroadcastMessage(message);
+                } else {
+                    ConsoleHelper.writeMessage("Error");
+                }
+            }
+        }
+
         private String serverHandshake(Connection connection) throws IOException, ClassNotFoundException {
             while (true) {
                 connection.send(new Message(MessageType.NAME_REQUEST));
