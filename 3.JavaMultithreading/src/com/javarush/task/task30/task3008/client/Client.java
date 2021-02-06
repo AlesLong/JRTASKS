@@ -5,14 +5,11 @@ import com.javarush.task.task30.task3008.ConsoleHelper;
 import com.javarush.task.task30.task3008.Message;
 import com.javarush.task.task30.task3008.MessageType;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class Client {
-
     protected Connection connection;
-    private volatile boolean clientConnected = false;
+    private volatile boolean clientConnected;
 
     protected String getServerAddress() {
         ConsoleHelper.writeMessage("Введите адрес сервера:");
@@ -47,5 +44,39 @@ public class Client {
 
     protected boolean shouldSendTextFromConsole() {
         return true;
+    }
+
+    public void run() {
+        SocketThread socketThread = getSocketThread();
+        socketThread.setDaemon(true);
+        socketThread.start();
+
+        try {
+            synchronized (this) {
+                wait();
+            }
+        } catch (InterruptedException e) {
+            ConsoleHelper.writeMessage("Произошла ошибка во время работы клиента.");
+            return;
+        }
+
+        if (clientConnected)
+            ConsoleHelper.writeMessage("Соединение установлено. Для выхода наберите команду 'exit'.");
+        else
+            ConsoleHelper.writeMessage("Произошла ошибка во время работы клиента.");
+
+        while (clientConnected) {
+            String text = ConsoleHelper.readString();
+            if (text.equalsIgnoreCase("exit"))
+                break;
+
+            if (shouldSendTextFromConsole())
+                sendTextMessage(text);
+        }
+    }
+
+    public static void main(String[] args) {
+        Client client = new Client();
+        client.run();
     }
 }
