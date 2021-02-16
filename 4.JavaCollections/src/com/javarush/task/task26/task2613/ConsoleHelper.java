@@ -3,6 +3,7 @@ package com.javarush.task.task26.task2613;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Locale;
 
 public class ConsoleHelper {
     private static BufferedReader bis = new BufferedReader(new InputStreamReader(System.in));
@@ -19,5 +20,34 @@ public class ConsoleHelper {
 
         }
         return string.toString();
+    }
+
+    public static String askCurrencyCode() {
+        writeMessage("Please enter currency code: ");
+        String s = readString();
+        while (s.length() != 3) {
+            s = readString();
+        }
+        return s.toUpperCase(Locale.ROOT);
+    }
+
+    public static String[] getValidTwoDigits(String currencyCode) {
+        while (true) {
+            ConsoleHelper.writeMessage(String.format("Please specify integer denomination and integer count. For example '10 3' means 30 %s", currencyCode));
+            String s = ConsoleHelper.readString();
+            String[] split = null;
+            if (s == null || (split = s.split(" ")).length != 2) {
+                ConsoleHelper.writeMessage("Please specify valid data.");
+            } else {
+                try {
+                    if (Integer.parseInt(split[0]) <= 0 || Integer.parseInt(split[1]) <= 0)
+                        ConsoleHelper.writeMessage("Please specify valid data.");
+                } catch (NumberFormatException e) {
+                    ConsoleHelper.writeMessage("Please specify valid data.");
+                    continue;
+                }
+                return split;
+            }
+        }
     }
 }
