@@ -1,5 +1,7 @@
 package com.javarush.task.task26.task2613;
 
+import com.javarush.task.task26.task2613.exception.InterruptOperationException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,26 +14,32 @@ public class ConsoleHelper {
         System.out.println(message);
     }
 
-    public static String readString() {
-        StringBuilder string = new StringBuilder();
+    public static String readString() throws InterruptOperationException {
         try {
-            string.append(bis.readLine());
-        } catch (IOException e) {
+            String text = bis.readLine();
+            if ("exit".equals(text.toLowerCase())) {
+                throw new InterruptOperationException();
+            }
 
+            return text;
+        } catch (IOException ignored) { //suppose it will never occur
         }
-        return string.toString();
+        return null;
     }
 
-    public static String askCurrencyCode() {
-        writeMessage("Please enter currency code: ");
-        String s = readString();
-        while (s.length() != 3) {
-            s = readString();
+    public static String askCurrencyCode() throws InterruptOperationException {
+        while (true) {
+            ConsoleHelper.writeMessage("Please choose a currency code, for example USD");
+            String currencyCode = ConsoleHelper.readString();
+            if (currencyCode == null || currencyCode.trim().length() != 3) {
+                ConsoleHelper.writeMessage("Please specify valid data.");
+                continue;
+            }
+            return currencyCode.trim().toUpperCase();
         }
-        return s.toUpperCase(Locale.ROOT);
     }
 
-    public static String[] getValidTwoDigits(String currencyCode) {
+    public static String[] getValidTwoDigits(String currencyCode) throws InterruptOperationException {
         while (true) {
             ConsoleHelper.writeMessage(String.format("Please specify integer denomination and integer count. For example '10 3' means 30 %s", currencyCode));
             String s = ConsoleHelper.readString();
@@ -51,7 +59,7 @@ public class ConsoleHelper {
         }
     }
 
-    public static Operation askOperation() {
+    public static Operation askOperation() throws InterruptOperationException {
         while (true) {
             ConsoleHelper.writeMessage("Please choose an operation desired or type 'EXIT' for exiting");
             ConsoleHelper.writeMessage("\t 1 - operation.INFO");
