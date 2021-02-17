@@ -8,7 +8,7 @@ import com.javarush.task.task26.task2613.exception.InterruptOperationException;
 import java.util.ResourceBundle;
 
 class LoginCommand implements Command {
-    private ResourceBundle validCreditCards = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".bigources.verifiedCards");
+    private ResourceBundle validCreditCards = ResourceBundle.getBundle(CashMachine.class.getPackage().getName() + ".resources.verifiedCards");
 
     @Override
     public void execute() throws InterruptOperationException {
