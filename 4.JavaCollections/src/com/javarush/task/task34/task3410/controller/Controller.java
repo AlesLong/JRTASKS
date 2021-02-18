@@ -9,7 +9,7 @@ public class Controller {
     private Model model;
 
     public Controller() {
-        view = new View(null);
+        view = new View(this);
         model = new Model();
         view.init();
     }
