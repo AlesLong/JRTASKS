@@ -1,5 +1,6 @@
 package com.javarush.task.task31.task3110;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
