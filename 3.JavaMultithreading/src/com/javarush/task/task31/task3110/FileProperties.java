@@ -1,7 +1,6 @@
 package com.javarush.task.task31.task3110;
 
 public class FileProperties {
-
     private String name;
     private long size;
     private long compressedSize;
@@ -13,6 +12,7 @@ public class FileProperties {
         this.compressedSize = compressedSize;
         this.compressionMethod = compressionMethod;
     }
+
 
     public String getName() {
         return name;
@@ -30,12 +30,14 @@ public class FileProperties {
         return compressionMethod;
     }
 
-    public long getCompressionRatio(){
-        return 100-((compressedSize*100)/size);
+    public long getCompressionRatio() {
+        // Вычисляем степень сжатия
+        return 100 - ((compressedSize * 100) / size);
     }
 
     @Override
     public String toString() {
+        // Строим красивую строку из свойств
         StringBuilder builder = new StringBuilder();
         builder.append(name);
         if (size > 0) {
