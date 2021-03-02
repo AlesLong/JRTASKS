@@ -65,7 +65,8 @@ public class ZipFileManager {
             ZipEntry zipEntry = zipInputStream.getNextEntry();
 
             while (zipEntry != null) {
-
+                // Поля "размер" и "сжатый размер" не известны, пока элемент не будет прочитан
+                // Давайте вычитаем его в какой-то выходной поток
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 copyData(zipInputStream, baos);
 
