@@ -9,21 +9,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class View extends JFrame implements ActionListener {
+    private Controller controller;
 
     private JTabbedPane tabbedPane = new JTabbedPane();
     private JTextPane htmlTextPane = new JTextPane();
     private JEditorPane plainTextPane = new JEditorPane();
 
-    private Controller controller;
-
-    public Controller getController() {
-        return controller;
+    public View() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            ExceptionHandler.log(e);
+        }
     }
 
     public void setController(Controller controller) {
         this.controller = controller;
     }
 
+    public Controller getController() {
+        return controller;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -38,15 +44,24 @@ public class View extends JFrame implements ActionListener {
     }
 
     public void initMenuBar() {
+        JMenuBar menuBar = new JMenuBar();
+        MenuHelper.initFileMenu(this, menuBar);
+        MenuHelper.initEditMenu(this, menuBar);
+        MenuHelper.initStyleMenu(this, menuBar);
+        MenuHelper.initAlignMenu(this, menuBar);
+        MenuHelper.initColorMenu(this, menuBar);
+        MenuHelper.initFontMenu(this, menuBar);
+        MenuHelper.initHelpMenu(this, menuBar);
 
+        getContentPane().add(menuBar, BorderLayout.NORTH);
     }
 
     public void initEditor() {
         htmlTextPane.setContentType("text/html");
         JScrollPane jScrollPaneHTML = new JScrollPane(htmlTextPane);
-        tabbedPane.addTab("HTML",jScrollPaneHTML);
+        tabbedPane.addTab("HTML", jScrollPaneHTML);
         JScrollPane jScrollPanePlane = new JScrollPane(plainTextPane);
-        tabbedPane.addTab("Текст",jScrollPanePlane);
+        tabbedPane.addTab("Текст", jScrollPanePlane);
         tabbedPane.setPreferredSize(new Dimension());
         tabbedPane.addChangeListener(new TabbedPaneChangeListener(this));
 
