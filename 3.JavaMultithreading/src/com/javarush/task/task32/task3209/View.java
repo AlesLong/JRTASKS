@@ -2,14 +2,19 @@ package com.javarush.task.task32.task3209;
 
 import com.javarush.task.task32.task3209.listeners.FrameListener;
 import com.javarush.task.task32.task3209.listeners.TabbedPaneChangeListener;
+import com.javarush.task.task32.task3209.listeners.UndoListener;
 
 import javax.swing.*;
+import javax.swing.undo.UndoManager;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class View extends JFrame implements ActionListener {
     private Controller controller;
+
+    private UndoManager undoManager = new UndoManager();
+    private UndoListener undoListener = new UndoListener(undoManager);
 
     private JTabbedPane tabbedPane = new JTabbedPane();
     private JTextPane htmlTextPane = new JTextPane();
@@ -58,11 +63,14 @@ public class View extends JFrame implements ActionListener {
 
     public void initEditor() {
         htmlTextPane.setContentType("text/html");
-        JScrollPane jScrollPaneHTML = new JScrollPane(htmlTextPane);
-        tabbedPane.addTab("HTML", jScrollPaneHTML);
-        JScrollPane jScrollPanePlane = new JScrollPane(plainTextPane);
-        tabbedPane.addTab("Текст", jScrollPanePlane);
-        tabbedPane.setPreferredSize(new Dimension());
+        JScrollPane htmlScrollPane = new JScrollPane(htmlTextPane);
+        tabbedPane.addTab("HTML", htmlScrollPane);
+
+        JScrollPane plainScrollPane = new JScrollPane(plainTextPane);
+        tabbedPane.addTab("Текст", plainScrollPane);
+
+        tabbedPane.setPreferredSize(new Dimension(300, 300));
+
         tabbedPane.addChangeListener(new TabbedPaneChangeListener(this));
 
         getContentPane().add(tabbedPane, BorderLayout.CENTER);
@@ -74,6 +82,22 @@ public class View extends JFrame implements ActionListener {
         pack();
     }
 
+    public void undo() {
+        try {
+            undoManager.undo();
+        } catch (Exception e) {
+            ExceptionHandler.log(e);
+        }
+    }
+
+    public void redo() {
+        try {
+            undoManager.redo();
+        } catch (Exception e) {
+            ExceptionHandler.log(e);
+        }
+    }
+
     public void exit() {
         controller.exit();
     }
@@ -82,10 +106,18 @@ public class View extends JFrame implements ActionListener {
     }
 
     public boolean canUndo() {
-        return false;
+        return undoManager.canUndo();
     }
 
     public boolean canRedo() {
-        return false;
+        return undoManager.canRedo();
+    }
+
+    public void resetUndo() {
+        undoManager.discardAllEdits();
+    }
+
+    public UndoListener getUndoListener() {
+        return undoListener;
     }
 }
