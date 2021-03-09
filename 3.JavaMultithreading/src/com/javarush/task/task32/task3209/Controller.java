@@ -13,6 +13,11 @@ public class Controller {
         this.view = view;
     }
 
+    public HTMLDocument getDocument() {
+        return document;
+    }
+
+
     public void init() {
 
     }
