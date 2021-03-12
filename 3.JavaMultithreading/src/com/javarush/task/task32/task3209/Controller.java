@@ -75,14 +75,45 @@ public class Controller {
         view.selectHtmlTab();
         resetDocument();
         view.setTitle("HTML редактор");
+        view.resetUndo();
         currentFile = null;
     }
 
     public void openDocument() {
+        view.selectHtmlTab();
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new HTMLFileFilter());
+        if (fileChooser.showOpenDialog(view) == JFileChooser.APPROVE_OPTION) {
+            currentFile = fileChooser.getSelectedFile();
+            resetDocument();
+            view.setTitle(currentFile.getName());
+
+            try (FileReader fileReader = new FileReader(currentFile)) {
+                new HTMLEditorKit().read(fileReader, document, 0);
+            } catch (IOException | BadLocationException e) {
+                ExceptionHandler.log(e);
+            }
+
+            view.resetUndo();
+        }
+    }
+
+    public void saveDocument() {
+        view.selectHtmlTab();
+        if (currentFile != null) {
+            try (FileWriter fileWriter = new FileWriter(currentFile)) {
+                new HTMLEditorKit().write(fileWriter, document, 0, document.getLength());
+            } catch (IOException | BadLocationException e) {
+                ExceptionHandler.log(e);
+            }
+        } else {
+            saveDocumentAs();
+        }
     }
 
     public void saveDocumentAs() {
         view.selectHtmlTab();
+
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new HTMLFileFilter());
         if (fileChooser.showSaveDialog(view) == JFileChooser.APPROVE_OPTION) {
@@ -95,9 +126,5 @@ public class Controller {
                 ExceptionHandler.log(e);
             }
         }
-    }
-
-    public void saveDocument() {
-
     }
 }
