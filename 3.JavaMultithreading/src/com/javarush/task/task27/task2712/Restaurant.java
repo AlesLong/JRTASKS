@@ -10,9 +10,10 @@ public class Restaurant {
         Waiter waiter = new Waiter();
 
         Cook cook = new Cook("Yevheniy");
+        tablet.addObserver(cook);
         cook.addObserver(waiter);
 
-        tablet.addObserver(cook);
+        
 
         tablet.createOrder();
         tablet.createOrder();

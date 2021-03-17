@@ -24,7 +24,19 @@ public class Order {
         for (int i = 1; i < dishes.size(); i++) {
             result += ", " + dishes.get(i).name();
         }
-        result += "] of " + tablet;
+        result += "] of " + tablet + ", cooking time " + getTotalCookingTime() + "min";
         return result;
+    }
+
+    public int getTotalCookingTime() {
+        int totalTime = 0;
+        for (Dish dish : dishes) {
+            totalTime += dish.getDuration();
+        }
+        return totalTime;
+    }
+
+    public boolean isEmpty() {
+        return dishes.size() <= 0;
     }
 }
