@@ -14,6 +14,6 @@ public class Advertisement {
         this.name = name;
         this.initialAmount = initialAmount;
         this.hits = hits;
-        this.duration = duration;
+        this.duration = duration;//
     }
 }
