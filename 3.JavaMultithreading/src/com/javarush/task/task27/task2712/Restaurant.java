@@ -9,6 +9,12 @@ public class Restaurant {
 
         Waiter waiter = new Waiter();
 
+        DirectorTablet directorTablet = new DirectorTablet();
+        directorTablet.printCookWorkloading();
+        directorTablet.printActiveVideoSet();
+        directorTablet.printAdvertisementProfit();
+        directorTablet.printArchivedVideoSet();
+
         Cook cook = new Cook("Yevheniy");
         tablet.addObserver(cook);
         cook.addObserver(waiter);
