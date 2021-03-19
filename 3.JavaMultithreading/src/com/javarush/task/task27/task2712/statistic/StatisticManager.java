@@ -22,7 +22,7 @@ public class StatisticManager {
     }
 
     public void register(EventDataRow data) {
-
+        this.statisticStorage.put(data);
     }
 
     private class StatisticStorage {
@@ -33,6 +33,14 @@ public class StatisticManager {
             for (EventType type : EventType.values()) {
                 this.storage.put(type, new ArrayList<EventDataRow>());
             }
+        }
+
+        private void put(EventDataRow data) {
+            EventType type = data.getType();
+            if (!this.storage.containsKey(type))
+                throw new UnsupportedOperationException();
+
+            this.storage.get(type).add(data);
         }
     }
 }
