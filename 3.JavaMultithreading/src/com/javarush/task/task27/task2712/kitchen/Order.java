@@ -21,6 +21,10 @@ public class Order {
 
     protected List<Dish> dishes;
 
+    protected void initDishes() throws IOException {
+        this.dishes = ConsoleHelper.getAllDishesForOrder();
+    }
+
     public Order(Tablet tablet) throws IOException {
         this.tablet = tablet;
         this.dishes = ConsoleHelper.getAllDishesForOrder();
