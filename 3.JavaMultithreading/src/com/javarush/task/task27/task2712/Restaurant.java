@@ -33,11 +33,10 @@ public class Restaurant {
             tablets.add(new Tablet(i + 1));
         }
 
-
+        OrderManager orderManager = new OrderManager();
         for (Tablet tablet :
                 tablets) {
-            tablet.addObserver(cookRoman);
-            tablet.addObserver(cookYevheniy);
+            tablet.addObserver(orderManager);
         }
 
         Thread thread = new Thread(new RandomOrderGeneratorTask(tablets, ORDER_CREATING_INTERVAL));
