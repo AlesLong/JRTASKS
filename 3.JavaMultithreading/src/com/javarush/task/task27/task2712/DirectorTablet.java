@@ -40,7 +40,6 @@ public class DirectorTablet {
         }
     }
 
-
     public void printActiveVideoSet() {
         List<Advertisement> videoSet = StatisticAdvertisementManager.getInstance().getVideoSet(true);
         Collections.sort(videoSet, new Comparator<Advertisement>() {

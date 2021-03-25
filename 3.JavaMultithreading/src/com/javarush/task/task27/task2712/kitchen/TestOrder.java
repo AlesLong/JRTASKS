@@ -5,7 +5,7 @@ import com.javarush.task.task27.task2712.Tablet;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class TestOrder extends Order{
+public class TestOrder extends Order {
     public TestOrder(Tablet tablet) throws IOException {
         super(tablet);
     }

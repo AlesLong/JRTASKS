@@ -13,7 +13,6 @@ public enum Dish {
         return duration;
     }
 
-
     Dish(int duration) {
         this.duration = duration;
     }

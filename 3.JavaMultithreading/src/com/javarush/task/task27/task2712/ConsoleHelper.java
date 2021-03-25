@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class ConsoleHelper {
     private static BufferedReader bis = new BufferedReader(new InputStreamReader(System.in));
@@ -37,6 +36,7 @@ public class ConsoleHelper {
                 writeMessage(dishName + " hasn't been detected");
             }
         }
+
         return dishes;
     }
 }

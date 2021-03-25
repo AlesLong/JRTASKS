@@ -10,7 +10,6 @@ import java.util.List;
 
 public class AdvertisementManager {
     private final AdvertisementStorage storage = AdvertisementStorage.getInstance();
-
     private int timeSeconds;
 
     public AdvertisementManager(int timeSeconds) {
@@ -27,7 +26,7 @@ public class AdvertisementManager {
         displayAdvertisement();
     }
 
-    //recursion
+    //recursy
     private long maxAmount;
     private List<Advertisement> optimalVideoSet;
     private int totalTimeSecondsLeft;
@@ -67,6 +66,7 @@ public class AdvertisementManager {
     }
 
     private void displayAdvertisement() {
+        //TODO displaying
         if (optimalVideoSet == null || optimalVideoSet.isEmpty()) {
             throw new NoVideoAvailableException();
         }
@@ -86,6 +86,7 @@ public class AdvertisementManager {
     }
 
     private void displayInPlayer(Advertisement advertisement) {
+        //TODO get Player instance and display content
         System.out.println(advertisement.getName() + " is displaying... " + advertisement.getAmountPerOneDisplaying() +
                 ", " + (1000 * advertisement.getAmountPerOneDisplaying() / advertisement.getDuration()));
     }

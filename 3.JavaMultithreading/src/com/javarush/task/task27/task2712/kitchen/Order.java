@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class Order {
-
     private final Tablet tablet;
 
     public List<Dish> getDishes() {
@@ -15,7 +14,6 @@ public class Order {
     }
 
     public Tablet getTablet() {
-
         return tablet;
     }
 
@@ -27,8 +25,7 @@ public class Order {
 
     public Order(Tablet tablet) throws IOException {
         this.tablet = tablet;
-        this.dishes = ConsoleHelper.getAllDishesForOrder();
-        ConsoleHelper.writeMessage(toString());
+        initDishes();
     }
 
     @Override

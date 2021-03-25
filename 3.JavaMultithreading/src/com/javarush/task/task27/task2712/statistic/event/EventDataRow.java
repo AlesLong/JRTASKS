@@ -8,5 +8,4 @@ public interface EventDataRow {
     Date getDate();
 
     int getTime();
-
 }
