@@ -8,6 +8,11 @@ public class Model {
     int score = 0;
     int maxTile = 2;
     private static final int FIELD_WIDTH = 4;
+
+    public Tile[][] getGameTiles() {
+        return gameTiles;
+    }
+
     private Tile[][] gameTiles;
 
     public Model() {
@@ -138,5 +143,30 @@ public class Model {
         gameTiles = rotateClockwise(gameTiles);
         gameTiles = rotateClockwise(gameTiles);
         gameTiles = rotateClockwise(gameTiles);
+    }
+
+    private int getEmptyTilesCount() {
+        return getEmptyTiles().size();
+    }
+
+    private boolean isFull() {
+        return getEmptyTilesCount() == 0;
+    }
+
+    boolean canMove() {
+        if (!isFull()) {
+            return true;
+        }
+
+        for (int x = 0; x < FIELD_WIDTH; x++) {
+            for (int y = 0; y < FIELD_WIDTH; y++) {
+                Tile t = gameTiles[x][y];
+                if ((x < FIELD_WIDTH - 1 && t.value == gameTiles[x + 1][y].value)
+                        || ((y < FIELD_WIDTH - 1) && t.value == gameTiles[x][y + 1].value)) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
